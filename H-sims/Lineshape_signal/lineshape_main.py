@@ -13,11 +13,11 @@ multiplots = 1
 lifetimes = 0
 
 # Adjustables
-w0 = [300E-6,750E-6] # [m]
-n = [1E12] # 1/cm^3
-l_s = [200E-3,200E-3,150E-3] # [m]
+w0 = [300E-6,750E-6, 1E-3] # [m]
+n = [1E14] # 1/cm^3, 1E12 for cold, 1E14 for RT
+l_s = [20E-3, 20E-3, 20E-3] # [m], 200E-3 for cold, 20E-3 for RT
 r_s = [25E-3,13E-3,2E-3] # [m]
-T = [1E-4] # [K]
+T = [300] # [K], 1E-4 for cold, 300 for RT
 P = 10E-3 # [W]
 
 # Detector solid angle percentage:
