@@ -18,7 +18,7 @@ n = [1E12] # 1/cm^3
 l_s = [200E-3,200E-3,150E-3] # [m]
 r_s = [25E-3,13E-3,2E-3] # [m]
 T = [1E-4] # [K]
-P = 10E-3 # [W]
+P = 5E-3 # [W]
 
 # Detector solid angle percentage:
 Detang = 0.05
@@ -161,7 +161,7 @@ def lifetime_sim(datas,drw = True):
         lab = f"n = {param[0]:.2g} $\\frac{{1}}{{\\mathrm{{cm^3}}}}$, T = {param[3]*1000} mK,\n$l_s$ = {param[1]*100} cm, $w_0$ = {param[2]*1E6} μm"
         ax.plot(trange,n, label= lab)
         print(N)
-        
+
     if drw:
         if logsc:
             plt.yscale("log")
