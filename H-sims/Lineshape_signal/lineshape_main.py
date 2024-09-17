@@ -37,7 +37,7 @@ Etrans = 6.62607015E-34*wtrans # [J/Hz]*[Hz]
 
 # Plotting settings
 samples = 20000
-detune = 0.25E5 # max detuning, [Hz]
+detune = 5E7 # max detuning, [Hz]
 simtime = 1000 # tracking sample lifetime, [s]
 logsc = False
 
