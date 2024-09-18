@@ -1,0 +1,4 @@
+Meas 1:
+Side: done from "right" side of beam, when looking out of beam port. Vertical from up.
+dist: 143
+currs: 4190(3.11W), 3190(2.16W), 2590 (1.58W), 1990 (1.01W)

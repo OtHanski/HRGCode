@@ -66,7 +66,7 @@ def plot_data(datax, datay, title):
     ax6 = fig.add_subplot(gs[:, 6:8])
     #axes = [ax1, ax2, ax3, ax4, ax5]
 
-    ax1.plot(xx, yy, label='Data X')
+    ax1.plot(xx, yx, label='Data X')
     ax1.set_ylabel('P [mW]')
     ax1.set_xlabel('X [mum]')
     ax1.set_title(title+" X-axis")
