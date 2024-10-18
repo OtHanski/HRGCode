@@ -13,11 +13,11 @@ multiplots = 1
 lifetimes = 0
 
 # Adjustables
-w0 = [300E-6,750E-6, 1E-3] # [m]
-n = [1E14] # 1/cm^3, 1E12 for cold, 1E14 for RT
-l_s = [20E-3, 20E-3, 20E-3] # [m], 200E-3 for cold, 20E-3 for RT
-r_s = [25E-3,13E-3,2E-3] # [m]
-T = [300] # [K], 1E-4 for cold, 300 for RT
+w0 = [750E-6] # [m]
+n = [1E12] # 1/cm^3, 1E12 for cold, 1E14 for RT
+l_s = 200E-3 # [m], 200E-3 for cold, 20E-3 for RT
+r_s = 20E-3 # [m]
+T = [150E-3] # [K], 1E-4 for cold, 300 for RT
 P = 10E-3 # [W]
 
 # Detector solid angle percentage:
@@ -37,7 +37,7 @@ Etrans = 6.62607015E-34*wtrans # [J/Hz]*[Hz]
 
 # Plotting settings
 samples = 20000
-detune = 5E7 # max detuning, [Hz]
+detune = 5E5 # max detuning, [Hz]
 simtime = 1000 # tracking sample lifetime, [s]
 logsc = False
 
@@ -118,7 +118,7 @@ def multiplot(datas, drw = True):
     
     for data in datas:
         x,y,FWHM,param = data[0],data[1],data[2],data[3]
-        lab = f"n = {param[0]:.2g} $\\frac{{1}}{{\\mathrm{{cm^3}}}}$, T = {param[3]*1000} mK,\n$l_s$ = {param[1]*100} cm, $w_0$ = {param[2]*1E6} μm"
+        lab = f"n = {param[0]:.2g} $\\frac{{1}}{{\\mathrm{{cm^3}}}}$, T = {param[3]*1000} mK,\n$l_s$ = {param[1]*1000:.3f} mm, $w_0$ = {param[2]*1E6} μm"
         ax.plot(x/1000,y, label= lab)
         FWHMtext += f"FWHM = {FWHM:.4} Hz\n"
     
@@ -151,7 +151,7 @@ def lifetime_sim(datas,drw = True):
         n,ls,w,T,detune_max,samples = param[0],param[1],param[2],param[3],param[4],param[5]
         trange = np.linspace(0,simtime,samples)
         N = np.zeros(len(trange))
-        V = r_s[2]**2*pi*ls*1E6    # cm^3
+        V = r_s**2*pi*ls*1E6    # cm^3
         N[0] = n*V
         
         for t in range(1,len(trange)):
@@ -180,7 +180,7 @@ def main():
         datas = []
         for i in range(len(w0)):
             for j in range(len(T)):
-                datas.append(calc_lineshape([n[0],l_s[2],w0[i],T[j],detune,samples]))
+                datas.append(calc_lineshape([n[0],l_s,w0[i],T[j],detune,samples]))
         
         multiplot(datas)
     
@@ -188,7 +188,7 @@ def main():
         datas = []
         for i in range(len(w0)):
             for j in range(len(T)):
-                datas.append(calc_lineshape([n[2],l_s[2],w0[i],T[j],detune,samples]))
+                datas.append(calc_lineshape([n[2],l_s,w0[i],T[j],detune,samples]))
         
         lifetime_sim(datas)
 
