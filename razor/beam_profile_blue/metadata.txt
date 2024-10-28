@@ -1,0 +1,14 @@
+Meas 1:
+Side: done from "right" side of beam, when looking out of beam port. Vertical from up.
+dist: 37 cm
+currs: 4190(??W), 1990 (??W)
+
+Meas 2: 
+Side: Done from "left"
+dist: 92.7 cm
+currs: 4190, 1990
+
+Meas 3:
+Side: Done from "left"
+dist: 112.7
+currs: 4190, 1990

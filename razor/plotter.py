@@ -75,19 +75,35 @@ def plot_data(datax, datay, title):
     dy_dx_y_poly2 = dy_dx_y_poly[xy > mean_y+abs(2*stddev_y)]
 
     # Fit polynomials to the x data
-    polyfit_x1 = np.polyfit(xx1, dy_dx_x_poly1, polydepth+offsetx1)
-    polyfit_x2 = np.polyfit(xx2, dy_dx_x_poly2, polydepth+offsetx2)
+    if len(xx1) > 1:
+        polyfit_x1 = np.polyfit(xx1, dy_dx_x_poly1, polydepth+offsetx1)
+    if len(xx2) > 1:
+        polyfit_x2 = np.polyfit(xx2, dy_dx_x_poly2, polydepth+offsetx2)
     # Fit polynomials to the y data
-    polyfit_y1 = np.polyfit(xy1, dy_dx_y_poly1, polydepth+offsety1)
-    polyfit_y2 = np.polyfit(xy2, dy_dx_y_poly2, polydepth+offsety2)
+    if len(xy1) > 1:
+        polyfit_y1 = np.polyfit(xy1, dy_dx_y_poly1, polydepth+offsety1)
+    if len(xy2) > 1:
+        polyfit_y2 = np.polyfit(xy2, dy_dx_y_poly2, polydepth+offsety2)
 
     polyfit_x = np.zeros(samples)
     polyfit_y = np.zeros(samples)
     # Combine the two polynomial fits in their respective regions
-    polyfit_x[xx_samp < mean_x-abs(2*stddev_x)] = np.polyval(polyfit_x1, xx_samp[xx_samp < mean_x-abs(2*stddev_x)])
-    polyfit_x[xx_samp > mean_x+abs(2*stddev_x)] = np.polyval(polyfit_x2, xx_samp[xx_samp > mean_x+abs(2*stddev_x)])
-    polyfit_y[xy_samp < mean_y-abs(2*stddev_y)] = np.polyval(polyfit_y1, xy_samp[xy_samp < mean_y-abs(2*stddev_y)])
-    polyfit_y[xy_samp > mean_y+abs(2*stddev_y)] = np.polyval(polyfit_y2, xy_samp[xy_samp > mean_y+abs(2*stddev_y)])
+    if len(xx1) > 1:
+        polyfit_x[xx_samp < mean_x-abs(2*stddev_x)] = np.polyval(polyfit_x1, xx_samp[xx_samp < mean_x-abs(2*stddev_x)])
+    else:
+        polyfit_x[xx_samp < mean_x-abs(2*stddev_x)] = 0
+    if len(xx2) > 1:
+        polyfit_x[xx_samp > mean_x+abs(2*stddev_x)] = np.polyval(polyfit_x2, xx_samp[xx_samp > mean_x+abs(2*stddev_x)])
+    else:
+        polyfit_x[xx_samp > mean_x+abs(2*stddev_x)] = 0
+    if len(xy1) > 1:
+        polyfit_y[xy_samp < mean_y-abs(2*stddev_y)] = np.polyval(polyfit_y1, xy_samp[xy_samp < mean_y-abs(2*stddev_y)])
+    else:
+        polyfit_y[xy_samp < mean_y-abs(2*stddev_y)] = 0
+    if len(xy2) > 1:
+        polyfit_y[xy_samp > mean_y+abs(2*stddev_y)] = np.polyval(polyfit_y2, xy_samp[xy_samp > mean_y+abs(2*stddev_y)])
+    else:
+        polyfit_y[xy_samp > mean_y+abs(2*stddev_y)] = 0
 
     polygaussian_x = gaussian(xx_samp, *popt_x) + polyfit_x
     polygaussian_y = gaussian(xy_samp, *popt_y) + polyfit_y
